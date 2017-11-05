@@ -9,6 +9,7 @@ function scroll.load()
 	zoom, zoomSpeed = 1, 0.001
 	cameraX,cameraY = mapLength/2+0.5,mapHeight/2+0.5 --in fractions of a tile - start in the middle of the map
 	cameraSpeed = 0.01
+	zoomOffset = 0.01
 
 	map = {}
 
@@ -43,7 +44,13 @@ function scroll.update()
 	if love.keyboard.isDown('s') then cameraY = cameraY - cameraSpeed end
 	if love.keyboard.isDown('d') then cameraX = cameraX - cameraSpeed end
 
-	if love.keyboard.isDown('lshift') then zoom = zoom + zoomSpeed end
-	if love.keyboard.isDown('lctrl') then zoom = zoom - zoomSpeed end
+	if love.keyboard.isDown('lshift') then 
+		zoom = zoom + zoomSpeed 
+		cameraX,cameraY = cameraX - zoomOffset, cameraY - zoomOffset
+	end
+	if love.keyboard.isDown('lctrl') then 
+		zoom = zoom - zoomSpeed 
+		cameraX,cameraY = cameraX + zoomOffset, cameraY + zoomOffset
+	end
 
 end
