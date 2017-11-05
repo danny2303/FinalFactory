@@ -8,6 +8,10 @@ function love.load()
 
 end
 
+function love.conf(t)
+
+end
+
 function love.draw()
 
 	scroll.draw()

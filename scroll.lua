@@ -3,10 +3,12 @@ scroll = {}
 function scroll.load()
 
 	factoryFloor = love.graphics.newImage("images/tiles/factoryFloor.png") --tile size is currently 100x100px
+	tileSize = 100
 
-	mapLength,mapHeight = 10,10
-	zoom = 1
-	cameraX,cameraY = 1,1
+	mapLength,mapHeight = 20,10
+	zoom, zoomSpeed = 1, 0.001
+	cameraX,cameraY = mapLength/2+0.5,mapHeight/2+0.5 --in fractions of a tile - start in the middle of the map
+	cameraSpeed = 0.01
 
 	map = {}
 
@@ -23,12 +25,25 @@ end
 
 function scroll.draw()
 
-	love.graphics.draw(factoryFloor,100,100)
+	for x=0,mapLength-1 do
+		for y=0, mapHeight-1 do
+			love.graphics.draw(factoryFloor,x*zoom*tileSize+(cameraX*tileSize)-((mapLength/2+0.5)*100),y*zoom*tileSize+(cameraY*tileSize)-((mapHeight/2+0.5)*100),0,zoom,zoom)
+		end
+	end
+
+	love.graphics.print("X: " .. cameraX,0,0)
+	love.graphics.print("Y: " .. cameraY,0,20)
 
 end
 
 function scroll.update()
 
+	if love.keyboard.isDown('w') then cameraY = cameraY + cameraSpeed end
+	if love.keyboard.isDown('a') then cameraX = cameraX + cameraSpeed end
+	if love.keyboard.isDown('s') then cameraY = cameraY - cameraSpeed end
+	if love.keyboard.isDown('d') then cameraX = cameraX - cameraSpeed end
 
+	if love.keyboard.isDown('lshift') then zoom = zoom + zoomSpeed end
+	if love.keyboard.isDown('lctrl') then zoom = zoom - zoomSpeed end
 
 end
