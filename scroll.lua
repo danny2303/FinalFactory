@@ -28,7 +28,7 @@ function scroll.draw()
 
 	for x=0,mapLength-1 do
 		for y=0, mapHeight-1 do
-			love.graphics.draw(factoryFloor,x*zoom*tileSize+(cameraX*tileSize)-((mapLength/2+0.5)*100),y*zoom*tileSize+(cameraY*tileSize)-((mapHeight/2+0.5)*100),0,zoom,zoom)
+			love.graphics.draw(factoryFloor,applyScrollX(x),applyScrollY(y),0,zoom,zoom)
 		end
 	end
 
@@ -52,5 +52,17 @@ function scroll.update()
 		zoom = zoom - zoomSpeed 
 		cameraX,cameraY = cameraX + zoomOffset, cameraY + zoomOffset
 	end
+
+end
+
+function applyScrollX(num) --num is x position in tiles
+	
+	return num*zoom*tileSize+(cameraX*tileSize)-((mapLength/2+0.5)*100)
+
+end
+
+function applyScrollY(num)
+	
+	return num*zoom*tileSize+(cameraY*tileSize)-((mapHeight/2+0.5)*100)
 
 end
