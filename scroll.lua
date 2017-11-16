@@ -24,7 +24,7 @@ function scroll.load()
 			if (x == 0) or (x == mapLength+1) or (y == 0) or (y == mapLength+1) then
 				invisibleBorderTile = true
 			end
-			map[x][y] = {{false,false,false,false,false},invisibleBorderTile} --tile data {selectionMatrix{selected?,selectonBoarders}}
+			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,"none"} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineType}
 
 		end
 	end
@@ -38,6 +38,9 @@ function scroll.draw()
 	for x=1,mapLength do
 		for y=1, mapHeight do
 			if map[x][y][2] == false then
+				if map[x][y][1][1] == true then
+					love.graphics.setColor(200,200,200)
+				else love.graphics.setColor(255,255,255) end
 				love.graphics.draw(factoryFloor,applyScrollX(x),applyScrollY(y),0,zoom,zoom)
 			end
 		end
@@ -122,6 +125,16 @@ function workOutBorders()
 					map[x][y][1][3] = true
 				else map[x][y][1][3] = false end
 
+				if map[x][y][1][2] == true or map[x][y][1][3] == true or map[x][y][1][4] == true or map[x][y][1][5] == true then
+
+					map[x][y][1][6] = true
+
+				else
+
+					map[x][y][1][6] = false
+
+				end
+
 			else
 
 				map[x][y][1][2], map[x][y][1][3], map[x][y][1][4], map[x][y][1][5] = false, false, false ,false
@@ -177,7 +190,7 @@ function scroll.selectArea(startX,startY,endX,endY)
 
 		for y = startY, endY do
 
-			if map[x][y][1][1] == true then
+			if map[x][y][1][6] == true then
 				selectionIntersects = true
 			end
 		end
