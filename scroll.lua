@@ -21,7 +21,7 @@ function scroll.load()
 		for y = 0,mapHeight+1 do
 
 			invisibleBorderTile = false
-			if (x == 0) or (x == mapLength+1) or (y == 0) or (y == mapLength+1) then
+			if (x == 0) or (x == mapLength+1) or (y == 0) or (y == mapHeight+1) then
 				invisibleBorderTile = true
 			end
 			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,"none"} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineType}
@@ -152,7 +152,7 @@ end
 
 function scroll.select(x,y)
 
-if not((x < 0) or (x > mapLength+1) or (y < 0) or (y > mapLength+1)) then
+if not((x < 1) or (x > mapLength) or (y < 1) or (y > mapLength)) then
 
 	if map[x][y][1][1] == false then
 		map[x][y][1][1] = true
@@ -191,19 +191,22 @@ function scroll.selectArea(startX,startY,endX,endY)
 	for x = startX, endX do
 
 		for y = startY, endY do
-
-			if map[x][y][1][6] == true then
-				selectionIntersects = true
+			if not((x < 0) or (x > mapLength+1) or (y < 0) or (y > mapHeight+1)) then
+	
+				print(y)
+				if map[x][y][1][6] == true then
+					selectionIntersects = true
+				end
 			end
 		end
 	end
 
 	if selectionIntersects == false  or singleSelection == true then
 			for x = startX, endX do
-
 				for y = startY, endY do
-
-					scroll.select(x,y)
+					if not((x < 0) or (x > mapLength+1) or (y < 0) or (y > mapHeight+1)) then
+						scroll.select(x,y)
+					end
 				end
 			end
 	end
