@@ -8,7 +8,7 @@ function scroll.load()
 	borderSize = 15
 
 	mapLength,mapHeight = 20,10
-	zoom, zoomSpeed = 1, 0.001
+	zoom, zoomSpeed = 1, 0.05
 	cameraX,cameraY = mapLength/2+0.5,mapHeight/2+0.5 --in fractions of a tile - start in the middle of the map
 	cameraSpeed = 0.01
 	zoomOffset = 0.01
@@ -60,14 +60,16 @@ function scroll.update()
 	if love.keyboard.isDown('s') then cameraY = cameraY - cameraSpeed end
 	if love.keyboard.isDown('d') then cameraX = cameraX - cameraSpeed end
 
-	if love.keyboard.isDown('lshift') then 
-		zoom = zoom + zoomSpeed 
+	function love.wheelmoved(x, y)
+    if y > 0 then
+        zoom = zoom + zoomSpeed 
 		cameraX,cameraY = cameraX - zoomOffset, cameraY - zoomOffset
-	end
-	if love.keyboard.isDown('lctrl') then 
-		zoom = zoom - zoomSpeed 
+    elseif y < 0 then
+        zoom = zoom - zoomSpeed 
 		cameraX,cameraY = cameraX + zoomOffset, cameraY + zoomOffset
-	end
+    end
+end
+
 
 	workOutBorders()
 
