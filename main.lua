@@ -1,9 +1,11 @@
 --require classes
 
 require "scroll"
+require "input"
 
 function love.load()
 
+	input.load()
 	scroll.load()
 
 end
@@ -20,6 +22,7 @@ end
 
 function love.update(dt)
 
+	input.update()
 	scroll.update()
 
 end
