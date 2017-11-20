@@ -2,11 +2,13 @@
 
 require "scroll"
 require "input"
+require "machine"
 
 function love.load()
 
 	input.load()
 	scroll.load()
+	machine.load()
 
 end
 
@@ -17,12 +19,14 @@ end
 function love.draw()
 
 	scroll.draw()
+	machine.draw()
 
 end
 
 function love.update(dt)
 
-	input.update()
 	scroll.update()
+	input.update()
+	machine.update()
 
 end

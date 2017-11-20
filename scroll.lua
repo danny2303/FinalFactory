@@ -24,7 +24,7 @@ function scroll.load()
 			if (x == 0) or (x == mapLength+1) or (y == 0) or (y == mapHeight+1) then
 				invisibleBorderTile = true
 			end
-			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,"none"} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineType}
+			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,machineData} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineData}
 
 		end
 	end
@@ -92,16 +92,16 @@ function drawBorders()
 	for x=1,mapLength do
 		for y=1, mapHeight do
 			if map[x][y][1][2] == true then
-				love.graphics.draw(border,applyScrollX(x),applyScrollY(y),0,zoom,zoom) --left
+				love.graphics.draw(border,applyScrollX(x),applyScrollY(y),0,zoom,zoom) --left (1+1)
 			end
 			if map[x][y][1][3] == true then
-				love.graphics.draw(border,applyScrollX(x+(tileSize-borderSize)/100),applyScrollY(y),0,zoom,zoom) --right
+				love.graphics.draw(border,applyScrollX(x+(tileSize-borderSize)/100),applyScrollY(y),0,zoom,zoom) --right (2+1)
 			end
 			if map[x][y][1][4] == true then
-				love.graphics.draw(border,applyScrollX(x),applyScrollY(y),4.71239,zoom,zoom) --up
+				love.graphics.draw(border,applyScrollX(x),applyScrollY(y),4.71239,zoom,zoom) --up (3+1)
 			end
 			if map[x][y][1][5] == true then
-				love.graphics.draw(border,applyScrollX(x),applyScrollY(y+1),4.71239,zoom,zoom) --down
+				love.graphics.draw(border,applyScrollX(x),applyScrollY(y+1),4.71239,zoom,zoom) --down (4+1)
 			end
 		end
 	end
