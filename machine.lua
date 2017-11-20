@@ -7,12 +7,12 @@ function machine.load()
 
 	--template: {ID,typeName,{inputSlots,inputSlotCapcity},{outputSlots,outputSlotCapcity},{itemsPerProccessingCycle,processingDuration(secs),proccessID},{requiredVoltage,requiredFrequency,requiredCurrent}}
 	machineTypes = {
-	{1,testMachine,{2,10},{2,10},{5,2,1},{3,50,20}}
+	{1,"testMachine",{2,10},{2,10},{5,2,1},{3,50,20}}
 }
 
-	--template: {ID,proccessName,inputsArrray{ID,materialName},outputsArray{ID,materialName}}
+	--template: {ID,proccessName,inputsArrray{ID,materialID},outputsArray{ID,materialID}}
 	processTypes = {
-	{1,testProcess,{1,wood},{1,coal}}
+	{1,"testProcess",{{1,1}},{{1,2}}}
 }
 
 end

@@ -3,12 +3,14 @@
 require "scroll"
 require "input"
 require "machine"
+require "resource"
 
 function love.load()
 
 	input.load()
 	scroll.load()
 	machine.load()
+	resource.load()
 
 end
 
