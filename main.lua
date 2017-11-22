@@ -22,6 +22,7 @@ function love.draw()
 
 	scroll.draw()
 	machine.draw()
+	resource.draw()
 
 end
 

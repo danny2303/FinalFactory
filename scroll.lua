@@ -46,8 +46,6 @@ function scroll.draw()
 		end
 	end
 
-	love.graphics.print("X: " .. cameraX,0,0)
-	love.graphics.print("Y: " .. cameraY,0,20)
 
 	drawBorders()
 
@@ -77,13 +75,13 @@ end
 
 function applyScrollX(num) --num is x position in tiles
 	
-	return num*zoom*tileSize+(cameraX*tileSize)-((50*mapLength)+50)
+	return num*zoom*tileSize+(cameraX*tileSize)
 
 end
 
 function applyScrollY(num)
 	
-	return num*zoom*tileSize+(cameraY*tileSize)-((mapHeight/2+0.5)*100)
+	return num*zoom*tileSize+(cameraY*tileSize)
 
 end
 
@@ -146,8 +144,6 @@ function workOutBorders()
 		end
 	end
 
-	print(map[1][1][1][3])
-
 end
 
 function scroll.select(x,y)
@@ -192,8 +188,6 @@ function scroll.selectArea(startX,startY,endX,endY)
 
 		for y = startY, endY do
 			if not((x < 0) or (x > mapLength+1) or (y < 0) or (y > mapHeight+1)) then
-	
-				print(y)
 				if map[x][y][1][6] == true then
 					selectionIntersects = true
 				end

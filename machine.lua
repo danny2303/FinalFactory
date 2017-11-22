@@ -1,3 +1,5 @@
+require "resource"
+
 machine = {}
 
 function machine.load()
@@ -25,7 +27,7 @@ end
 
 function machine.draw()
 
-
+	resource.drawItem(1,2,2)
 
 end
 

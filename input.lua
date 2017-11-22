@@ -28,8 +28,8 @@ function mouseClicked()
 
 	--tile selection
 
-	tilePressX = round((x-(cameraX*tileSize)+(50*mapLength)-50)/(tileSize*zoom)+0.5,0)
-	tilePressY = round((y-(cameraY*tileSize)+(50*mapHeight)-50)/(tileSize*zoom)+0.5,0)
+	tilePressX = math.floor(((x-(tileSize*cameraX))/(tileSize*zoom)))
+	tilePressY = math.floor(((y-(tileSize*cameraY))/(tileSize*zoom)))
 
 end
 
@@ -42,8 +42,9 @@ function mouseReleased()
 
 	x,y = love.mouse.getPosition()
 
-	tileReleaseX = round((x-(cameraX*tileSize)+(50*mapLength)-50)/(tileSize*zoom)+0.5,0)
-	tileReleaseY = round((y-(cameraY*tileSize)+(50*mapHeight)-50)/(tileSize*zoom)+0.5,0)
+	tileReleaseX = math.floor(((x-(tileSize*cameraX))/(tileSize*zoom)))
+	tileReleaseY = math.floor(((y-(tileSize*cameraY))/(tileSize*zoom)))
+	print(zoom)
 
 	scroll.selectArea(tilePressX,tilePressY,tileReleaseX,tileReleaseY)
 
