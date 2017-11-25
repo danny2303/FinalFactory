@@ -27,7 +27,6 @@ end
 
 function machine.draw()
 
-	resource.drawItem(1,2,2)
 
 end
 

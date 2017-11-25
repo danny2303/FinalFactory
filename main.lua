@@ -31,5 +31,6 @@ function love.update(dt)
 	scroll.update()
 	input.update()
 	machine.update()
+	resource.update()
 
 end

@@ -96,7 +96,7 @@ function drawBorders()
 				love.graphics.draw(border,applyScrollX(x+(tileSize-borderSize)/100),applyScrollY(y),0,zoom,zoom) --right (2+1)
 			end
 			if map[x][y][1][4] == true then
-				love.graphics.draw(border,applyScrollX(x),applyScrollY(y),4.71239,zoom,zoom) --up (3+1)
+				love.graphics.draw(border,applyScrollX(x),applyScrollY(y+0.15),4.71239,zoom,zoom) --up (3+1)
 			end
 			if map[x][y][1][5] == true then
 				love.graphics.draw(border,applyScrollX(x),applyScrollY(y+1),4.71239,zoom,zoom) --down (4+1)
