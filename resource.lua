@@ -59,7 +59,6 @@ function removeUnusedAnimations()
 	indexesToRemove = {}
 	if #itemAnimations > 0 then
 		for i = #itemAnimations,1,-1 do --this iterates the array in reverse to avoid indexes changing mid-loop from deletion
-			print("3")
 			if itemAnimations[i][6] == true then
 				table.remove(itemAnimations,i)
 			end

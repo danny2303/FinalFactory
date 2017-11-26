@@ -1,3 +1,5 @@
+
+
 scroll = {}
 
 function scroll.load()
@@ -24,12 +26,16 @@ function scroll.load()
 			if (x == 0) or (x == mapLength+1) or (y == 0) or (y == mapHeight+1) then
 				invisibleBorderTile = true
 			end
-			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,machineData} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineData}
+			machineData = {}
+			itemPath = {}
+			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,machineData,itemPath} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineData,itemPath}
+			--itempath template = {entrySector,exitSector}
 
 		end
 	end
 
 
+	scroll.placeMachine(1,1,1)
 
 end
 
@@ -41,13 +47,26 @@ function scroll.draw()
 				if map[x][y][1][1] == true then
 					love.graphics.setColor(200,200,200)
 				else love.graphics.setColor(255,255,255) end
-				love.graphics.draw(factoryFloor,applyScrollX(x),applyScrollY(y),0,zoom,zoom)
+				if map[x][y][3] == false then
+					tileTexture = factoryFloor
+				else 
+					tileTexture = machine.getMachineType(map[x][y][4][1])[2] 
+				end
+				love.graphics.draw(tileTexture,applyScrollX(x),applyScrollY(y),0,zoom,zoom)
 			end
 		end
 	end
 
 
 	drawBorders()
+
+end
+
+function scroll.placeMachine(x,y,ID)
+
+	map[x][y][4] = machine.createMachineData(ID)
+	map[x][y][5] = machine.createItemPath(ID)
+	map[x][y][3] = true
 
 end
 

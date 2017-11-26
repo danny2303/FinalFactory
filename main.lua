@@ -8,8 +8,8 @@ require "resource"
 function love.load()
 
 	input.load()
-	scroll.load()
 	machine.load()
+	scroll.load()
 	resource.load()
 
 end
