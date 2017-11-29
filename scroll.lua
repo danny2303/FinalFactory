@@ -37,6 +37,10 @@ function scroll.load()
 
 	scroll.placeMachine(1,1,1)
 
+	addItemsToMachine(1,1,{"wood","bark"})
+	addItemsToMachine(1,1,{"g","gg"})
+	print(map[1][1][4][4][3])--COMPLETELY BROKEN 
+
 end
 
 function scroll.draw()
