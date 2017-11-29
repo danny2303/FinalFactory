@@ -40,7 +40,7 @@ function flowInputBuffers()
 		for y = 1,mapHeight do --for every tile 
 			if map[x][y][3] == true then	--if it is a machine
 				if #map[x][y][4][2] > 0 then	--if it has an item in its input buffer
-					if #map[x][y][4][4] > 0	then	--if it is not processing anything atm
+					if #map[x][y][4][4] < 1	then	--if it is not processing anything atm
 						machineType = map[x][y][4][1]
 						--move the largest amount of items allowed into the processing slot:
 
@@ -60,6 +60,7 @@ function flowInputBuffers()
 						map[x][y][4][2] = deleteFromArray(map[x][y][4][2],1,maxNumItemsToMove)
 
 						map[x][y][4][4] = addItemsToInventory(map[x][y][4][4],itemsToMove)
+						print("test")
 
 					end
 				end
