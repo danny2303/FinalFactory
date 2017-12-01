@@ -4,6 +4,7 @@ input = {}
 
 function input.load()
 
+	lastHovered = {5,5}
 
 
 end
@@ -20,6 +21,9 @@ ldown = love.mouse.isDown(1)
 		mouseReleased()
 	end
 
+findHoveredTile()
+
+
 end
 
 function mouseClicked()
@@ -28,23 +32,55 @@ function mouseClicked()
 
 	--tile selection
 
-	tilePressX = math.floor(((x-(tileSize*cameraX))/(tileSize*zoom)))
-	tilePressY = math.floor(((y-(tileSize*cameraY))/(tileSize*zoom)))
+	clickPos = findSelectedTile(x,y)
+	tilePressX,tilePressY = clickPos[1], clickPos[2]
 
 end
 
-function round(num, numDecimalPlaces)
-  local mult = 10^(numDecimalPlaces or 0)
-  return math.floor(num * mult + 0.5) / mult
+function findHoveredTile()
+
+	hoverPos = findSelectedTile(love.mouse.getX(),love.mouse.getY())
+	tileX,tileY = hoverPos[1], hoverPos[2]
+
+	if not({tileX,tileY} == lastHovered) then
+
+		if checkIfInMap(tileX,tileY) == true then
+
+			map[lastHovered[1]][lastHovered[2]][1][7] = false
+			map[tileX][tileY][1][7] = true
+			lastHovered = {tileX,tileY}
+		end
+	end
+
+end
+
+function checkIfInMap(x,y)
+
+	check = true
+
+	if (x < 1) or (y < 1) or (x > mapLength) or (y > mapHeight) then
+		check = false
+	end
+
+	return check
+
+end
+
+function findSelectedTile(x,y)
+
+	tileX = math.floor(((x-(tileSize*cameraX))/(tileSize*zoom)))
+	tileY = math.floor(((y-(tileSize*cameraY))/(tileSize*zoom)))
+
+	return {tileX,tileY}
+
 end
 
 function mouseReleased()
 
 	x,y = love.mouse.getPosition()
 
-	tileReleaseX = math.floor(((x-(tileSize*cameraX))/(tileSize*zoom)))
-	tileReleaseY = math.floor(((y-(tileSize*cameraY))/(tileSize*zoom)))
-	print(zoom)
+	releasePos = findSelectedTile(x,y)
+	tileReleaseX, tileReleaseY = releasePos[1], releasePos[2]
 
 	scroll.selectArea(tilePressX,tilePressY,tileReleaseX,tileReleaseY)
 

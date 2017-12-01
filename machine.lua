@@ -60,7 +60,6 @@ function flowInputBuffers()
 						map[x][y][4][2] = deleteFromArray(map[x][y][4][2],1,maxNumItemsToMove)
 
 						map[x][y][4][4] = addItemsToInventory(map[x][y][4][4],itemsToMove)
-						print("test")
 
 					end
 				end

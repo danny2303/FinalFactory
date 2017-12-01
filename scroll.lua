@@ -5,7 +5,7 @@ scroll = {}
 function scroll.load()
 
 	factoryFloor = love.graphics.newImage("images/tiles/factoryFloor.png") --tile size is currently 100x100px
-	border = love.graphics.newImage("images/boarder.png") --size is 15 x 100
+	border = love.graphics.newImage("images/UI/boarder.png") --size is 15 x 100
 	tileSize = 100
 	borderSize = 15
 
@@ -28,7 +28,7 @@ function scroll.load()
 			end
 			machineData = {}
 			itemPath = {}
-			map[x][y] = {{false,false,false,false,false,false},invisibleBorderTile,false,machineData,itemPath} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder},isInvisible,isMachine,machineData,itemPath}
+			map[x][y] = {{false,false,false,false,false,false,false},invisibleBorderTile,false,machineData,itemPath} --tile data {selectionMatrix{selected?,selectonBoarders,hasBorder,hovered?},isInvisible,isMachine,machineData,itemPath}
 			--itempath template = {entrySector,exitSector}
 
 		end
@@ -44,7 +44,7 @@ function scroll.draw()
 	for x=1,mapLength do
 		for y=1, mapHeight do
 			if map[x][y][2] == false then
-				if map[x][y][1][1] == true then
+				if map[x][y][1][1] == true or map[x][y][1][7] == true then
 					love.graphics.setColor(200,200,200)
 				else love.graphics.setColor(255,255,255) end
 				if map[x][y][3] == false then

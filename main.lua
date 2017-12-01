@@ -7,10 +7,13 @@ require "resource"
 
 function love.load()
 
-	input.load()
+	cursor = love.mouse.newCursor("images/UI/cursor.png", 31, 31 )
+	love.mouse.setCursor(cursor)
+
 	machine.load()
 	scroll.load()
 	resource.load()
+	input.load()
 
 end
 
