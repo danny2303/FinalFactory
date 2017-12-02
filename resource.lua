@@ -21,7 +21,7 @@ function resource.load()
 
 	--animation template = {ID,texture,vector{x,y},{x,y},{endX,endY},depleted?}
 
-	resource.newItemAnimation(2,{1,1},{1.5,1.5},{1,1})
+	resource.newItemAnimation(1,{0.5,0},{1.5,1.5},{1,1})
 
 end
 

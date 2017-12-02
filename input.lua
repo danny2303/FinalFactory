@@ -1,32 +1,62 @@
 require "scroll"
+require "UI"
 
 input = {}
 
 function input.load()
 
-	lastHovered = {5,5}
-
+	lastHovered = {1,1}
+	lastRightClicked = {1,1}
 
 end
 
 function input.update()
 
 prevLdown = ldown
+prevRdown = rdown
 ldown = love.mouse.isDown(1)
+rdown = love.mouse.isDown(2)
 
 	if ldown == true and prevLdown == false then
-		mouseClicked()
+		lmouseClicked()
 	end
 	if ldown == false and prevLdown == true then
-		mouseReleased()
+		lmouseReleased()
 	end
 
 findHoveredTile()
 
+if rdown == false and prevRdown == true then --rMouse released
+
+	manageRightClick(love.mouse.getX(),love.mouse.getY())
 
 end
 
-function mouseClicked()
+
+end
+
+function manageRightClick(x,y)
+
+	clickPos = findSelectedTile(x,y)
+	x,y  = clickPos[1], clickPos[2]
+
+	if not(clickPos == lastRightClicked) and infoBoard == false then
+
+		infoBoard = true
+		infoTile = clickPos
+		lastRightClicked = clickpos
+
+	elseif not(clickPos == lastRightClicked) then
+
+		infoBoard = false
+
+	end
+
+
+
+end
+
+function lmouseClicked()
 
 	x,y = love.mouse.getPosition()
 
@@ -75,13 +105,12 @@ function findSelectedTile(x,y)
 
 end
 
-function mouseReleased()
+function lmouseReleased()
 
 	x,y = love.mouse.getPosition()
 
 	releasePos = findSelectedTile(x,y)
 	tileReleaseX, tileReleaseY = releasePos[1], releasePos[2]
-
 	scroll.selectArea(tilePressX,tilePressY,tileReleaseX,tileReleaseY)
 
 end

@@ -9,9 +9,9 @@ function scroll.load()
 	tileSize = 100
 	borderSize = 15
 
-	mapLength,mapHeight = 20,10
+	mapLength,mapHeight = 20,50
 	zoom, zoomSpeed = 1, 0.05
-	cameraX,cameraY = mapLength/2+0.5,mapHeight/2+0.5 --in fractions of a tile - start in the middle of the map
+	cameraX,cameraY = 0,0
 	cameraSpeed = 0.01
 	zoomOffset = 0.01
 
@@ -40,6 +40,7 @@ function scroll.load()
 end
 
 function scroll.draw()
+
 
 	for x=1,mapLength do
 		for y=1, mapHeight do
@@ -167,15 +168,13 @@ end
 
 function scroll.select(x,y)
 
-if not((x < 1) or (x > mapLength) or (y < 1) or (y > mapLength)) then
-
 	if map[x][y][1][1] == false then
 		map[x][y][1][1] = true
 	else
 		map[x][y][1][1] = false
 	end
 
-end
+
 
 end
 
@@ -204,7 +203,6 @@ function scroll.selectArea(startX,startY,endX,endY)
 	selectionIntersects = false
 
 	for x = startX, endX do
-
 		for y = startY, endY do
 			if not((x < 0) or (x > mapLength+1) or (y < 0) or (y > mapHeight+1)) then
 				if map[x][y][1][6] == true then
