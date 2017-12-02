@@ -9,11 +9,12 @@ function scroll.load()
 	tileSize = 100
 	borderSize = 15
 
-	mapLength,mapHeight = 20,50
+	mapLength,mapHeight = 5,5
 	zoom, zoomSpeed = 1, 0.05
 	cameraX,cameraY = 0,0
 	cameraSpeed = 0.01
-	zoomOffset = 0.01
+	zoomOffset = 0
+	minZoom,maxZoom = 0.2,1.5
 
 	map = {}
 
@@ -41,7 +42,6 @@ end
 
 function scroll.draw()
 
-
 	for x=1,mapLength do
 		for y=1, mapHeight do
 			if map[x][y][2] == false then
@@ -57,6 +57,10 @@ function scroll.draw()
 			end
 		end
 	end
+
+	love.graphics.print(zoom,10,10)
+	love.graphics.print(cameraX,10,30)
+	love.graphics.print(cameraY,10,50)
 
 
 	drawBorders()
@@ -79,12 +83,12 @@ function scroll.update()
 	if love.keyboard.isDown('d') then cameraX = cameraX - cameraSpeed end
 
 	function love.wheelmoved(x, y)
-    if y > 0 then
-        zoom = zoom + zoomSpeed 
-		cameraX,cameraY = cameraX - zoomOffset, cameraY - zoomOffset
-    elseif y < 0 then
-        zoom = zoom - zoomSpeed 
-		cameraX,cameraY = cameraX + zoomOffset, cameraY + zoomOffset
+    if y > 0 and zoom < maxZoom then
+        zoom = zoom + zoomSpeed
+        cameraX,cameraY = cameraX - zoomSpeed*zoom, cameraY - zoomSpeed*zoom
+    elseif y < 0 and zoom > minZoom then
+        zoom = zoom - zoomSpeed
+        cameraX,cameraY = cameraX + zoomSpeed*zoom, cameraY + zoomSpeed*zoom
     end
 end
 
