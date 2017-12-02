@@ -58,11 +58,6 @@ function scroll.draw()
 		end
 	end
 
-	love.graphics.print(zoom,10,10)
-	love.graphics.print(cameraX,10,30)
-	love.graphics.print(cameraY,10,50)
-
-
 	drawBorders()
 
 end

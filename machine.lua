@@ -10,9 +10,9 @@ function machine.load()
 
 	escalator = love.graphics.newImage("images/tiles/escalator.png")
 
-	--template: {ID,texture,{inputSlots,inputSlotCapcity},{outputSlots,outputSlotCapcity},{itemsPerProccessingCycle,processingDuration(secs),proccessID},{requiredVoltage,requiredFrequency,requiredCurrent}}
+	--template: {ID,texture,{inputSlots,inputSlotCapcity},{outputSlots,outputSlotCapcity},{itemsPerProccessingCycle,processingDuration(secs),proccessID},{requiredVoltage,requiredFrequency,requiredCurrent},machineName}
 	machineTypes = {
-	{1,escalator,{2,10},{2,10},{5,2,1},{3,50,20}}
+	{1,escalator,{2,10},{2,10},{5,2,1},{3,50,20},"Escalator"}
 }
 
 	--template: {ID,proccessName,inputsArrray{ID,materialID},outputsArray{ID,materialID}}

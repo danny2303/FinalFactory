@@ -40,8 +40,10 @@ function manageRightClick(x,y)
 	clickPos = findSelectedTile(x,y)
 	x,y  = clickPos[1], clickPos[2]
 
-	if not(clickPos == lastRightClicked) and infoBoard == false then
+	if not(clickPos == lastRightClicked) and infoBoard == false and map[x][y][3] == true then
 
+		infoBoardAnimationStage = 0 --reset the opening animation
+		infoBoardAnimationComplete = false
 		infoBoard = true
 		infoTile = clickPos
 		lastRightClicked = clickpos
